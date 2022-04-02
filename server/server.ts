@@ -16,14 +16,6 @@ app.get("/api/test", (req: Request<any, any, any, any>, res: Response<any>) => {
   res.json({ date: new Date().toString() });
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "..", "client", "build")));
-
-  app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
-  });
-}
-
 const cards = [
   "A",
   "2",
@@ -55,6 +47,14 @@ app.get("/api/hand", (req, res) => {
     ],
   });
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "..", "client", "build")));
+
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+  });
+}
 
 app.listen(+PORT, () => {
   console.log(`Server listening on port ${PORT}`);
