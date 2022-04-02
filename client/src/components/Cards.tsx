@@ -16,17 +16,15 @@ export const Cards = () => {
     getData();
   }, []);
 
-  if (cards.length === 0) {
-    return <p>Loading...</p>;
-  } else {
-    return (
-      <section>
-        {cards.map((card: CardsProp, index: number) => (
+  return (
+    <section>
+      {cards.length === 0 && <p>Loading...</p>}
+      {cards.length > 0 &&
+        cards.map((card: CardsProp, index: number) => (
           <p key={index}>
             Card {index + 1}: {card.card} of {card.suit}
           </p>
         ))}
-      </section>
-    );
-  }
+    </section>
+  );
 };
